@@ -1,2 +1,2 @@
 # OrderMatching
-This is a training project
+This is a training project.
