@@ -8,9 +8,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "trader_order")
 public class TraderOrder {
-    @Column(name = "user_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "trader_order_id")
+    private long traderOrderId;
+
+    @Column(name = "user_id",nullable = false)
     private long userId;
 
-    @Column(name = "trader_id")
+    @Column(name = "trader_id",nullable = false)
     private long traderId;
 }

@@ -3,6 +3,7 @@ package com.training.ordermatching.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Data
 @Entity
@@ -13,9 +14,6 @@ public class Order {
     @Column(name = "order_id")
     private long orderId;
 
-    @Column(name = "symbol", nullable = false, length = 128)
-    private String symbol;
-
     @Column(name = "order_type", nullable = false, length = 128)
     private String orderType;
 
@@ -25,15 +23,18 @@ public class Order {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @Column(name = "price", nullable = false)   //mark
+    @Column(name = "price")
     private float price;
 
     @Column(name = "status", length = 128)
     private String status;
 
     @Column(name = "create_date")
-    private Data createDate;
+    private Date createDate;
+
+    @Column(name = "limit_time")
+    private Date limitTime;
 
     @Column(name = "finish_date")
-    private Data finishDate;
+    private Date finishDate;
 }

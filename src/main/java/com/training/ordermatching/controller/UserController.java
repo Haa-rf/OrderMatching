@@ -2,6 +2,7 @@ package com.training.ordermatching.controller;
 
 import com.training.ordermatching.model.User;
 import com.training.ordermatching.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RestController
 @RequestMapping("/orderMatching/user")
+@Slf4j
 public class UserController {
 
     @Autowired
@@ -31,12 +33,14 @@ public class UserController {
     }
 
     @PostMapping(value = "/register")
-    public String register(@RequestParam(value = "user_name") String username, @RequestParam(value = "password") String password) {
+    public String register(@RequestBody User param) {
+        log.info("register--------name："+param.getUserName()+"，password:"+param.getPassword());
+
         JSONObject response = new JSONObject();
-        if (userService.findByUserName(username) == null) {
+        if (userService.findByUserName(param.getUserName()) == null) {
             User user = new User();
-            user.setUserName(username);
-            user.setPassword(password);
+            user.setUserName(param.getUserName());
+            user.setPassword(param.getPassword());
             user.setType("trader");
             userService.save(user);
             response.put("status", true);
