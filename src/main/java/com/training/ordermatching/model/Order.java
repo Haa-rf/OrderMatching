@@ -28,12 +28,12 @@ public class Order {
     @Column(name = "price", nullable = false)   //mark
     private float price;
 
-    @Column(name = "status", nullable = false, length = 9)
+    @Column(name = "status", length = 128)
     private String status;
 
-    @Column(name = "create_date", nullable = false)
+    @Column(name = "create_date")
     private Data createDate;
 
-    @Column(name = "finish_date", nullable = false)
+    @Column(name = "finish_date")
     private Data finishDate;
 }
