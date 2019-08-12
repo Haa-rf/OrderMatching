@@ -1,0 +1,7 @@
+package com.training.ordermatching.service;
+
+import com.training.ordermatching.model.Order;
+
+public interface OrderService {
+    Order findByOrderId(long orderId);
+}
