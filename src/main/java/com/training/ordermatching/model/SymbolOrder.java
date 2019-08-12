@@ -14,10 +14,10 @@ public class SymbolOrder {
     @Column(name = "symbol_order_id")
     private long symbolOrderId;
 
-    @Column(name = "symbol_id", nullable = false, length = 128)
-    private String symbolId;
+    @Column(name = "symbol_id", nullable = false)
+    private long symbolId;
 
-    @Column(name = "order_id", nullable = false, length = 128)
-    private String orderId;
+    @Column(name = "order_id", nullable = false)
+    private long orderId;
 
 }
