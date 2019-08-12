@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order,Long> {
     Order findByOrderId(long orderId);
-    List<Order> findAllBySymbol(String symbol);
+    List<Order> findBySymbol(String symbol);
 }

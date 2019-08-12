@@ -28,10 +28,10 @@ public class Order {
     private String side;
 
     @Column(name = "quantity", nullable = false)
-    private int quantity;
+    private Integer quantity;
 
     @Column(name = "price")
-    private float price;
+    private Float price;
 
     @Column(name = "status", length = 128)
     private String status;
@@ -40,7 +40,7 @@ public class Order {
     private Timestamp createDate;
 
     @Column(name = "limit_time")
-    private int limitTime;
+    private Integer limitTime;
 
     @Column(name = "finish_date")
     private Timestamp finishDate;

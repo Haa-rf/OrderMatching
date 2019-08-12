@@ -25,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findAllBySymbol(String symbol) {
-        return orderRepository.findAllBySymbol(symbol);
+    public List<Order> findBySymbol(String symbol) {
+        return orderRepository.findBySymbol(symbol);
     }
 }
