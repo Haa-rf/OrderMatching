@@ -21,6 +21,9 @@ public class Order {
     @Column(name = "order_type", nullable = false, length = 128)
     private String orderType;
 
+    @Column(name = "symbol", nullable = false, length = 128)
+    private String symbol;
+
     @Column(name = "side", nullable = false, length = 128)
     private String side;
 

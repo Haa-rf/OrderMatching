@@ -23,10 +23,10 @@ public class OrderController {
     public void submitOrder(@RequestBody Order param){
         log.info("order："+param.getTraderName()+","+param.getPrice());
 
-        JSONObject response = new JSONObject();
         Order order = new Order();
         order.setTraderName(param.getTraderName());
         order.setOrderType(param.getOrderType());
+        order.setSymbol(param.getSymbol());
         order.setSide(param.getSide());
         order.setQuantity(param.getQuantity());
         order.setPrice(param.getPrice());

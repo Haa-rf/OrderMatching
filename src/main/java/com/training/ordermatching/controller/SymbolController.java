@@ -3,9 +3,7 @@ package com.training.ordermatching.controller;
 import com.training.ordermatching.model.Order;
 import com.training.ordermatching.model.Symbol;
 import com.training.ordermatching.model.SymbolOrder;
-import com.training.ordermatching.repository.SymbolOrderRepository;
 import com.training.ordermatching.service.OrderService;
-import com.training.ordermatching.service.SymbolOrderService;
 import com.training.ordermatching.service.SymbolService;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
@@ -27,8 +25,6 @@ public class SymbolController {
     @Autowired
     private SymbolService symbolService;
     @Autowired
-    private SymbolOrderService symbolOrderService;
-    @Autowired
     private OrderService orderService;
 
     @GetMapping("/price")
@@ -38,13 +34,10 @@ public class SymbolController {
         for (Symbol symbol:symbols){
             JSONObject re = new JSONObject();
             re.put("symbol",symbol.getSymbolName());
-            long symbolId = symbol.getSymbolId();
-            List<SymbolOrder> symbolOrders = symbolOrderService.findBySymbolId(symbolId);
+            List<Order> orders = orderService.findAllBySymbol(symbol.getSymbolName());
             float bid = 0;
             float ask = 0;
-            for (SymbolOrder symbolOrder:symbolOrders){
-                long orderId = symbolOrder.getOrderId();
-                Order order = orderService.findByOrderId(orderId);
+            for (Order order:orders){
                 if (order.getOrderType()=="BUY"){
                     bid = order.getPrice()>bid?order.getPrice():bid;
                 }else {
