@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -13,6 +14,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private long orderId;
+
+    @Column(name = "trader_name" , nullable = false, length = 128)
+    private String traderName;
 
     @Column(name = "order_type", nullable = false, length = 128)
     private String orderType;
@@ -30,11 +34,11 @@ public class Order {
     private String status;
 
     @Column(name = "create_date")
-    private Date createDate;
+    private Timestamp createDate;
 
     @Column(name = "limit_time")
-    private Date limitTime;
+    private int limitTime;
 
     @Column(name = "finish_date")
-    private Date finishDate;
+    private Timestamp finishDate;
 }
