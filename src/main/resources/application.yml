@@ -29,3 +29,9 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQL5Dialect
+
+order:
+  threadNamePrefix: order-matching-exec
+  maxPoolSize: 20
+  corePoolSize: 10
+  queueCapacity: 1000

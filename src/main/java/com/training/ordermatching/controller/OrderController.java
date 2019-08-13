@@ -1,5 +1,6 @@
 package com.training.ordermatching.controller;
 
+import com.training.ordermatching.component.MatchingComponent;
 import com.training.ordermatching.model.Order;
 import com.training.ordermatching.model.User;
 import com.training.ordermatching.service.OrderService;
@@ -18,6 +19,8 @@ import java.sql.Timestamp;
 public class OrderController {
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private MatchingComponent matchingComponent;
 
     @PostMapping(value = "/submit")
     public void submitOrder(@RequestBody Order param){
@@ -29,11 +32,14 @@ public class OrderController {
         order.setSymbol(param.getSymbol());
         order.setSide(param.getSide());
         order.setQuantity(param.getQuantity());
+        order.setQuantityLeft(param.getQuantity());
         order.setPrice(param.getPrice());
         order.setStatus("pending");
         order.setCreateDate(new Timestamp(System.currentTimeMillis()));
         order.setLimitTime(param.getLimitTime());
 
         orderService.save(order);
+
+        matchingComponent.asyncMatching(order);
     }
 }
