@@ -49,16 +49,78 @@ create table symbol(
 insert into user(user_name,password,type) values ("test_trader","123456","trader");
 insert into user(user_name,password,type) values ("test_admin","123456","admin");
 
-insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_admin","APPLE","BUY",100,12.25,"peding");
-insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_admin","APPLE","BUY",100,15.25,"peding");
-insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_admin","APPLE","BUY",100,11.25,"peding");
-insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_admin","APPLE","BUY",100,12.75,"peding");
-insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_admin","APPLE","BUY",100,12.55,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader","APPLE","BUY",100,199.20,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader","IBM","BUY",100,133.45,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader","CITI","BUY",100,63.25,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader","BAIDU","BUY",100,94.33,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader","BABA","BUY",100,156.55,"peding");
 
-insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_admin","APPLE","SELL",100,14.25,"peding");
-insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_admin","APPLE","SELL",100,13.25,"peding");
-insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_admin","APPLE","SELL",100,15.75,"peding");
-insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_admin","APPLE","SELL",100,12.95,"peding");
-insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_admin","APPLE","SELL",100,12.55,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader","APPLE","SELL",100,202.25,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader","IBM","SELL",100,134.25,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader","CITI","SELL",100,64.75,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader","BAIDU","SELL",100,95.66,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader","BABA","SELL",100,159.55,"peding");
 
 insert into symbol (symbol_name) values ("APPLE");
+
+
+insert into user(user_name,password,type) values ("test_trader1","123456","trader");
+insert into user(user_name,password,type) values ("test_trader2","123456","trader");
+insert into user(user_name,password,type) values ("test_trader3","123456","trader");
+insert into user(user_name,password,type) values ("test_trader4","123456","trader");
+
+
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader1","APPLE","BUY",100,198.25,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader1","IBM","BUY",100,133.65,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader1","CITI","BUY",100,63.11,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader1","BAIDU","BUY",100,93.75,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader1","BABA","BUY",100,155.55,"peding");
+
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader1","APPLE","SELL",100,201.25,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader1","IBM","SELL",100,135.66,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader1","CITI","SELL",100,64.55,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader1","BAIDU","SELL",100,94.95,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader1","BABA","SELL",100,159.05,"peding");
+
+
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader2","APPLE","BUY",100,197.33,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader2","IBM","BUY",100,133.15,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader2","CITI","BUY",100,63.15,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader2","BAIDU","BUY",100,93.75,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader2","BABA","BUY",100,156.25,"peding");
+
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader2","APPLE","SELL",100,203.11,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader2","IBM","SELL",100,134.02,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader2","CITI","SELL",100,65.22,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader2","BAIDU","SELL",100,95.95,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader2","BABA","SELL",100,158.35,"peding");
+
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader3","APPLE","BUY",100,199.75,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader3","IBM","BUY",100,133.98,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader3","CITI","BUY",100,64.25,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader3","BAIDU","BUY",100,92.75,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader3","BABA","BUY",100,157.25,"peding");
+
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader3","APPLE","SELL",100,200.25,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader3","IBM","SELL",100,136.01,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader3","CITI","SELL",100,66.75,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader3","BAIDU","SELL",100,96.95,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader3","BABA","SELL",100,159.85,"peding");
+
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader4","APPLE","BUY",100,200.25,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader4","IBM","BUY",100,132.25,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader4","CITI","BUY",100,62.25,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader4","BAIDU","BUY",100,93.75,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader4","BABA","BUY",100,156.33,"peding");
+
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader4","APPLE","SELL",100,202.35,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader4","IBM","SELL",100,136.25,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader4","CITI","SELL",100,64.25,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader4","BAIDU","SELL",100,97.15,"peding");
+insert into orders (order_type,trader_name,symbol,side,quantity,price,status) values ("MKT","test_trader4","BABA","SELL",100,158.75,"peding");
+
+
+insert into symbol (symbol_name) values ("IBM");
+insert into symbol (symbol_name) values ("CITI");
+insert into symbol (symbol_name) values ("BAIDU");
+insert into symbol (symbol_name) values ("BABA");

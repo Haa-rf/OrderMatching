@@ -3,7 +3,6 @@ package com.training.ordermatching.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 @Data

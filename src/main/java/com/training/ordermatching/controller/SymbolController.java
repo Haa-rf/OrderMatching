@@ -35,25 +35,13 @@ public class SymbolController {
             JSONObject re = new JSONObject();
             log.info("----------------symbol name:"+symbol.getSymbolName());
             re.put("symbol",symbol.getSymbolName());
-            List<Order> orders = orderService.findBySymbol(symbol.getSymbolName());
-            List<Order> buyOrders = new ArrayList<>();
-            List<Order> sellOrders = new ArrayList<>();
-            for (Order order:orders){
-                log.info("----------------order:"+order.toString());
-                if (order.getSide().equals("BUY")){
-                    buyOrders.add(order);
-                }else {
-                    sellOrders.add(order);
-                }
-            }
-            float bid = buyOrders.isEmpty()?0:buyOrders.get(0).getPrice();
-            float ask = sellOrders.isEmpty()?0:sellOrders.get(0).getPrice();
-            for (Order order :buyOrders){
-                bid = order.getPrice()>bid?order.getPrice():bid;
-            }
-            for (Order order :sellOrders){
-                ask = order.getPrice()<ask?order.getPrice():ask;
-            }
+
+            Order buyOrder = orderService.findBySymbolAndSideIsBuy(symbol.getSymbolName());
+            Order sellOrder = orderService.findBySymbolAndSideIsSell(symbol.getSymbolName());
+            float bid = buyOrder==null?0:buyOrder.getPrice();
+            float ask = sellOrder==null?0:sellOrder.getPrice();
+
+            log.info("--------------order-----bid :"+bid+",ask:"+ask);
             re.put("bid",bid);
             re.put("ask",ask);
             response.put(re);

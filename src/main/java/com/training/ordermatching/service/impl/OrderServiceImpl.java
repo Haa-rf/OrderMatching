@@ -28,4 +28,15 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findBySymbol(String symbol) {
         return orderRepository.findBySymbol(symbol);
     }
+
+    @Override
+    public Order findBySymbolAndSideIsBuy(String symbol) {
+        return orderRepository.findBySymbolAndSideIsBuy(symbol);
+    }
+
+    @Override
+    public Order findBySymbolAndSideIsSell(String symbol) {
+        return orderRepository.findBySymbolAndSideIsSell(symbol);
+    }
+
 }
