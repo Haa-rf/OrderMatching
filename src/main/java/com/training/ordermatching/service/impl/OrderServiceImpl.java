@@ -52,9 +52,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Page<Order> findPendingOrders(Pageable pageable) {
-        return orderRepository.findPendingOrders(pageable);
+    public List<Order> findPendingBuyOrderLimit10(String symbol) {
+        return orderRepository.findPendingBuyOrderLimit10(symbol);
     }
+
+    @Override
+    public List<Order> findPendingSellOrderLimit10(String symbol) {
+        return orderRepository.findPendingSellOrderLimit10(symbol);
+    }
+
 
     @Override
     public Page<Order> findOrdersByTraderName(String trader_name, Pageable pageable) {
