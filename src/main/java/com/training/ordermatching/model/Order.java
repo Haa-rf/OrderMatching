@@ -29,6 +29,9 @@ public class Order {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
+    @Column(name = "quantity_left", nullable = false)
+    private Integer quantityLeft;
+
     @Column(name = "price")
     private Float price;
 

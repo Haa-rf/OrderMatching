@@ -39,4 +39,14 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findBySymbolAndSideIsSell(symbol);
     }
 
+    @Override
+    public Order findPendingBuyOrder(String symbol) {
+        return orderRepository.findPendingBuyOrder(symbol);
+    }
+
+    @Override
+    public Order findPendingSellOrder(String symbol) {
+        return orderRepository.findPendingSellOrder(symbol);
+    }
+
 }
