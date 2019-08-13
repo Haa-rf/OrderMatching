@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -48,17 +49,21 @@ public class OrderController {
         matchingComponent.asyncMatching(order);
     }
 
-    @GetMapping("/pendingOrders")
-    public String getPendingOrders() {
-
-        PageRequest pageRequest = PageRequest.of(1, 100, Sort.Direction.DESC, "createDate");
-        Page<Order> orders = orderService.findPendingOrders(pageRequest);
+    @PostMapping("/pendingOrders")
+    public String getPendingOrders(@RequestBody List<String> symbols) {
+        log.info("----------pendingOrders: symbol    "+symbols.toString());
+        List<Order> orders = new ArrayList<>();
+        for (String symbolName : symbols){
+            orders.addAll(orderService.findPendingBuyOrderLimit10(symbolName));
+            orders.addAll(orderService.findPendingSellOrderLimit10(symbolName));
+        }
         JSONArray response = new JSONArray();
         for (Order order : orders) {
             JSONObject re = new JSONObject();
             re.put("symbol", order.getSymbol());
             re.put("side", order.getSide());
             re.put("quantity", order.getQuantity());
+            re.put("price",order.getPrice());
             re.put("create_date", order.getCreateDate());
             response.put(re);
         }
@@ -67,10 +72,10 @@ public class OrderController {
     }
 
     @GetMapping("/historyOrder")
-    public Page<Order> getHistotyOrder(@RequestParam("pageSize")Integer pageSize,@RequestParam("pageIndex")Integer pageIndex,@RequestParam("user_name")String userName){
-        PageRequest pageRequest = PageRequest.of(pageIndex,pageSize,Sort.Direction.DESC,"createDate");
+    public List<Order> getHistoryOrder(@RequestParam("pageSize")Integer pageSize,@RequestParam("pageIndex")Integer pageIndex,@RequestParam("user_name")String userName){
+        PageRequest pageRequest = PageRequest.of(pageIndex,pageSize,Sort.Direction.DESC,"create_date");
         Page<Order> orders = orderService.findOrdersByTraderName(userName,pageRequest);
 
-        return orders;
+        return orders.getContent();
     }
 }

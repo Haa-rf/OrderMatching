@@ -21,7 +21,9 @@ public interface OrderService {
 
     Order findPendingSellOrder(String symbol);
 
-    Page<Order> findPendingOrders(Pageable pageable);
+    List<Order> findPendingBuyOrderLimit10(String symbol);
+
+    List<Order> findPendingSellOrderLimit10(String symbol);
 
     Page<Order> findOrdersByTraderName(String trader_name,Pageable pageable);
 
