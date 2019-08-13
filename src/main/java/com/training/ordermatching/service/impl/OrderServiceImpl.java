@@ -4,6 +4,8 @@ import com.training.ordermatching.model.Order;
 import com.training.ordermatching.repository.OrderRepository;
 import com.training.ordermatching.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,6 +49,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order findPendingSellOrder(String symbol) {
         return orderRepository.findPendingSellOrder(symbol);
+    }
+
+    @Override
+    public Page<Order> findPendingOrders(Pageable pageable) {
+        return orderRepository.findPendingOrders(pageable);
+    }
+
+    @Override
+    public Page<Order> findOrdersByTraderName(String trader_name, Pageable pageable) {
+        return orderRepository.findOrdersByTraderName(trader_name,pageable);
     }
 
 }
