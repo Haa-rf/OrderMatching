@@ -7,5 +7,7 @@ import java.util.List;
 public interface OrderService {
     Order findByOrderId(long orderId);
     void save(Order order);
-    List<Order> findAllBySymbol(String symbol);
+    List<Order> findBySymbol(String symbol);
+    Order findBySymbolAndSideIsBuy(String symbol);
+    Order findBySymbolAndSideIsSell(String symbol);
 }
