@@ -40,4 +40,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query(value = "select * from orders where trader_name=?1",nativeQuery = true)
     Page<Order> findOrdersByTraderName(String trader_name,Pageable pageable);
 
+    @Query(value = "select * from orders where symbol=?1 and status = 'matched' and side='BUY' order by finish_date DESC lIMIT 50", nativeQuery = true)
+    List<Order> findMatchOrderBySymbol(String symbol);
+
 }

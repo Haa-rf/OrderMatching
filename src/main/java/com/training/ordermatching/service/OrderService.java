@@ -31,4 +31,5 @@ public interface OrderService {
 
     Page<Order> findOrdersByTraderName(String trader_name, Pageable pageable);
 
+    List<Order> findMatchOrderBySymbol(String symbol);
 }

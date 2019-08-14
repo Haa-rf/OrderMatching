@@ -81,4 +81,19 @@ public class OrderController {
 
         return orders.getContent();
     }
+
+    @GetMapping("/historyMatch")
+    public String getHistoryMatch(@RequestParam("symbol")String symbol){
+        JSONArray response = new JSONArray();
+        List<Order> orders = orderService.findMatchOrderBySymbol(symbol);
+
+        for (Order order:orders){
+            JSONObject re = new JSONObject();
+            re.put("symbol",order.getSymbol());
+            re.put("price",order.getPrice());
+            re.put("date",order.getFinishDate());
+            response.put(order);
+        }
+        return response.toString();
+    }
 }

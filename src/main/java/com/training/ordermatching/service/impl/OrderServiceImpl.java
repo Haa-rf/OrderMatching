@@ -77,4 +77,9 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findOrdersByTraderName(trader_name,pageable);
     }
 
+    @Override
+    public List<Order> findMatchOrderBySymbol(String symbol) {
+        return orderRepository.findMatchOrderBySymbol(symbol);
+    }
+
 }
