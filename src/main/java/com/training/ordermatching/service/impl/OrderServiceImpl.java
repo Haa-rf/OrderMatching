@@ -52,6 +52,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> findPendingBuyOrderLimit10() {
+        return orderRepository.findPendingBuyOrderLimit10();
+    }
+
+    @Override
+    public List<Order> findPendingSellOrderLimit10() {
+        return orderRepository.findPendingSellOrderLimit10();
+    }
+
+    @Override
     public List<Order> findPendingBuyOrderLimit10(String symbol) {
         return orderRepository.findPendingBuyOrderLimit10(symbol);
     }
@@ -65,6 +75,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Page<Order> findOrdersByTraderName(String trader_name, Pageable pageable) {
         return orderRepository.findOrdersByTraderName(trader_name,pageable);
+    }
+
+    @Override
+    public List<Order> findMatchOrderBySymbol(String symbol) {
+        return orderRepository.findMatchOrderBySymbol(symbol);
     }
 
 }
