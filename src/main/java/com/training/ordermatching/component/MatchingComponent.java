@@ -25,25 +25,49 @@ public class MatchingComponent {
     @Async(value = "orderTaskExecutor")
     public void asyncMatching(Order order) {
 
-        if (order.getOrderType().equals("MKT")){
-            doMKTMatching(order);
+        switch (order.getOrderType()){
+            case "MKT":
+                doMKTMatching(order);
+                break;
+            case "LMT":
+                doLMTMatching(order);
+                break;
+            default:
+                log.info("------------asyncMatching : default-------------");
+                break;
         }
 
         log.info(" -------------------do matching-------------");
     }
 
     private void doMKTMatching(Order order){
+        Order fundOrder;
+
         if (order.getSide().equals("BUY")){
-            Order sellPendingOrder = orderService.findPendingSellOrder(order.getSymbol());
-            calMKT(order,sellPendingOrder);
+            fundOrder = orderService.findPendingSellOrder(order.getSymbol());
         }else {
-            Order buyPendingOrder = orderService.findPendingSellOrder(order.getSymbol());
-            calMKT(order,buyPendingOrder);
+            fundOrder = orderService.findPendingSellOrder(order.getSymbol());
         }
+
+        order.setPrice(fundOrder.getPrice());
+        calMKTorLMT(order,fundOrder);
     }
 
-    private void calMKT(Order order,Order fundOrder){
-        order.setPrice(fundOrder.getPrice());
+    private void doLMTMatching(Order order){
+        Order fundOrder;
+
+        if (order.getSide().equals("BUY")){
+            fundOrder = orderService.findPendingSellOrder(order.getSymbol());
+        }else {
+            fundOrder = orderService.findPendingSellOrder(order.getSymbol());
+        }
+
+        if (fundOrder!=null && fundOrder.getPrice()==order.getPrice()){
+            calMKTorLMT(order,fundOrder);
+        }
+    }
+    
+    private void calMKTorLMT(Order order,Order fundOrder){
 
         if (order.getQuantityLeft()<fundOrder.getQuantityLeft()){
             fundOrder.setQuantityLeft(fundOrder.getQuantityLeft()-order.getQuantityLeft());
