@@ -92,7 +92,7 @@ public class OrderController {
             re.put("symbol",order.getSymbol());
             re.put("price",order.getPrice());
             re.put("date",order.getFinishDate());
-            response.put(order);
+            response.put(re);
         }
         return response.toString();
     }
