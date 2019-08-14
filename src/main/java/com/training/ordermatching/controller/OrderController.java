@@ -30,6 +30,7 @@ public class OrderController {
 
     @PostMapping(value = "/submit")
     public void submitOrder(@RequestBody Order param){
+
         log.info("order："+param.getTraderName()+","+param.getPrice());
 
         Order order = new Order();
@@ -39,7 +40,9 @@ public class OrderController {
         order.setSide(param.getSide());
         order.setQuantity(param.getQuantity());
         order.setQuantityLeft(param.getQuantity());
-        order.setPrice(param.getPrice());
+        if (!param.getOrderType().equals("MKT")){
+            order.setPrice(param.getPrice());
+        }
         order.setStatus("pending");
         order.setCreateDate(new Timestamp(System.currentTimeMillis()));
         order.setLimitTime(param.getLimitTime());

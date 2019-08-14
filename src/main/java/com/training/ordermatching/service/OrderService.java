@@ -21,10 +21,14 @@ public interface OrderService {
 
     Order findPendingSellOrder(String symbol);
 
+    List<Order> findPendingBuyOrderLimit10();
+
+    List<Order> findPendingSellOrderLimit10();
+
     List<Order> findPendingBuyOrderLimit10(String symbol);
 
     List<Order> findPendingSellOrderLimit10(String symbol);
 
-    Page<Order> findOrdersByTraderName(String trader_name,Pageable pageable);
+    Page<Order> findOrdersByTraderName(String trader_name, Pageable pageable);
 
 }

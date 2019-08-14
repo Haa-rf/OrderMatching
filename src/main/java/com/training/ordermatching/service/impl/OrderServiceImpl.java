@@ -52,6 +52,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> findPendingBuyOrderLimit10() {
+        return orderRepository.findPendingBuyOrderLimit10();
+    }
+
+    @Override
+    public List<Order> findPendingSellOrderLimit10() {
+        return orderRepository.findPendingSellOrderLimit10();
+    }
+
+    @Override
     public List<Order> findPendingBuyOrderLimit10(String symbol) {
         return orderRepository.findPendingBuyOrderLimit10(symbol);
     }

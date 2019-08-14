@@ -25,6 +25,12 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query(value = "select * from orders where symbol=?1 and side='SELL' and status='pending' order by price asc LIMIT 1", nativeQuery = true)
     Order findPendingSellOrder(String symbol);
 
+    @Query(value = "select * from orders where side='BUY' and status='pending' order by price desc LIMIT 10", nativeQuery = true)
+    List<Order> findPendingBuyOrderLimit10();
+
+    @Query(value = "select * from orders where side='SELL' and status='pending' order by price asc LIMIT 10", nativeQuery = true)
+    List<Order> findPendingSellOrderLimit10();
+
     @Query(value = "select * from orders where symbol=?1 and side='BUY' and status='pending' order by price desc LIMIT 10", nativeQuery = true)
     List<Order> findPendingBuyOrderLimit10(String symbol);
 
