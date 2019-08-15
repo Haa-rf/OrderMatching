@@ -3,7 +3,6 @@ package com.training.ordermatching.controller;
 import com.training.ordermatching.component.MatchingComponent;
 import com.training.ordermatching.component.OrderLog;
 import com.training.ordermatching.model.Order;
-import com.training.ordermatching.model.User;
 import com.training.ordermatching.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
@@ -48,7 +47,8 @@ public class OrderController {
             order.setPrice(param.getPrice());
         }
         order.setStatus("pending");
-        order.setCreateDate(new Timestamp(System.currentTimeMillis()));
+        Timestamp createDate = new Timestamp(System.currentTimeMillis());
+        order.setCreateDate(createDate);
         order.setLimitTime(param.getLimitTime());
 
         orderService.save(order);
@@ -56,11 +56,11 @@ public class OrderController {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String time = dateFormat.format(date);
-        String filePath = "//"+time+".log";
+        String fileName = time+".log";
 
-        String message = "The order is created: "+order.toString();
-        orderLog.createFile(filePath);
-        orderLog.writeFileAppend(filePath,message);
+        String message = "*********    The order is created at: "+createDate.toString()+",Order detail: "+order.toString()+System.getProperty("line.separator");
+        orderLog.createFile(fileName);
+        orderLog.writeFileAppend(fileName,message);
 
         matchingComponent.asyncMatching(order);
     }
@@ -70,15 +70,15 @@ public class OrderController {
         log.info("----------pendingOrders: symbol    "+symbols.toString());
         List<Order> orders = new ArrayList<>();
         for (String symbolName : symbols){
-            orders.addAll(orderService.findPendingBuyOrderLimit10(symbolName));
-            orders.addAll(orderService.findPendingSellOrderLimit10(symbolName));
+            orders.addAll(orderService.findPendingBuyOrderLimit20(symbolName));
+            orders.addAll(orderService.findPendingSellOrderLimit20(symbolName));
         }
         JSONArray response = new JSONArray();
         for (Order order : orders) {
             JSONObject re = new JSONObject();
             re.put("symbol", order.getSymbol());
             re.put("side", order.getSide());
-            re.put("quantity", order.getQuantity());
+            re.put("quantity", order.getQuantityLeft());
             re.put("price",order.getPrice());
             re.put("create_date", order.getCreateDate());
             response.put(re);

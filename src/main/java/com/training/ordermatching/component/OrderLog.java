@@ -43,49 +43,4 @@ public class OrderLog {
         }
     }
 
-    public void writeFileOverlay(String filePath, String Content) {
-        PrintWriter pw = null;
-        try {
-            pw = new PrintWriter(parentFilePath + filePath);
-            pw.write(Content);
-            pw.flush();
-            pw.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (pw != null) {
-                pw.flush();
-                pw.close();
-            }
-        }
-    }
-
-    public void readFile(String filePath) {
-        InputStreamReader in = null;
-        BufferedReader br = null;
-        try {
-            File file = new File(parentFilePath + filePath);
-            in = new InputStreamReader(new FileInputStream(file), "gbk");
-            br = new BufferedReader(in);
-            String s;
-            while ((s = br.readLine()) != null) {
-                System.out.println(s);
-            }
-            br.close();
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (br != null) {
-                    br.close();
-                }
-                if (in != null) {
-                    in.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

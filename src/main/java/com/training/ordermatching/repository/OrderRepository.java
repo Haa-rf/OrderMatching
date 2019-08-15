@@ -25,17 +25,19 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query(value = "select * from orders where symbol=?1 and side='SELL' and status='pending' order by price asc LIMIT 1", nativeQuery = true)
     Order findPendingSellOrder(String symbol);
 
-    @Query(value = "select * from orders where side='BUY' and status='pending' order by price desc LIMIT 10", nativeQuery = true)
-    List<Order> findPendingBuyOrderLimit10();
+    @Query(value = "SELECT * FROM orders a WHERE 20>(SELECT COUNT(*) FROM orders WHERE order_id=a.order_id and price>a.price)  and\n" +
+            "side='BUY' and status='pending' ORDER BY a.symbol,a.price desc ", nativeQuery = true)
+    List<Order> findPendingBuyOrderLimit20();
 
-    @Query(value = "select * from orders where side='SELL' and status='pending' order by price asc LIMIT 10", nativeQuery = true)
-    List<Order> findPendingSellOrderLimit10();
+    @Query(value = "SELECT * FROM orders a WHERE 20>(SELECT COUNT(*) FROM orders WHERE order_id=a.order_id and price<a.price)  and\n" +
+            "side='SELL' and status='pending' ORDER BY a.symbol,a.price ASC", nativeQuery = true)
+    List<Order> findPendingSellOrderLimit20();
 
-    @Query(value = "select * from orders where symbol=?1 and side='BUY' and status='pending' order by price desc LIMIT 10", nativeQuery = true)
-    List<Order> findPendingBuyOrderLimit10(String symbol);
+    @Query(value = "select * from orders where symbol=?1 and side='BUY' and status='pending' order by price desc LIMIT 20", nativeQuery = true)
+    List<Order> findPendingBuyOrderLimit20(String symbol);
 
-    @Query(value = "select * from orders where symbol=?1 and side='SELL' and status='pending' order by price asc LIMIT 10", nativeQuery = true)
-    List<Order> findPendingSellOrderLimit10(String symbol);
+    @Query(value = "select * from orders where symbol=?1 and side='SELL' and status='pending' order by price asc LIMIT 20", nativeQuery = true)
+    List<Order> findPendingSellOrderLimit20(String symbol);
 
     @Query(value = "select * from orders where trader_name=?1",nativeQuery = true)
     Page<Order> findOrdersByTraderName(String trader_name,Pageable pageable);
