@@ -48,7 +48,8 @@ public class OrderController {
             order.setPrice(param.getPrice());
         }
         order.setStatus("pending");
-        order.setCreateDate(new Timestamp(System.currentTimeMillis()));
+        Timestamp createDate = new Timestamp(System.currentTimeMillis());
+        order.setCreateDate(createDate);
         order.setLimitTime(param.getLimitTime());
 
         orderService.save(order);
@@ -56,11 +57,11 @@ public class OrderController {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String time = dateFormat.format(date);
-        String filePath = "//"+time+".log";
+        String fileName = time+".log";
 
-        String message = "The order is created: "+order.toString();
-        orderLog.createFile(filePath);
-        orderLog.writeFileAppend(filePath,message);
+        String message = "*********    The order is created at: "+createDate.toString()+",Order detail: "+order.toString()+System.getProperty("line.separator");
+        orderLog.createFile(fileName);
+        orderLog.writeFileAppend(fileName,message);
 
         matchingComponent.asyncMatching(order);
     }

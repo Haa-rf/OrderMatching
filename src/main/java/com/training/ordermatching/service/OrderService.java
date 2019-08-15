@@ -21,9 +21,9 @@ public interface OrderService {
 
     Order findPendingSellOrder(String symbol);
 
-    List<Order> findPendingBuyOrderLimit10();
+    List<Order> findPendingBuyOrderLimit20();
 
-    List<Order> findPendingSellOrderLimit10();
+    List<Order> findPendingSellOrderLimit20();
 
     List<Order> findPendingBuyOrderLimit10(String symbol);
 

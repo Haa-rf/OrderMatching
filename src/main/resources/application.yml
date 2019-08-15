@@ -35,3 +35,8 @@ order:
   maxPoolSize: 20
   corePoolSize: 10
   queueCapacity: 1000
+
+order_log:
+#  filePathPar: /home/ubuntu/OrderMatching/Log/
+  filePathPar: D:\\OrderMatching\\Log\\
+

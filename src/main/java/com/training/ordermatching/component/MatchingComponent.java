@@ -9,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import java.security.acl.LastOwnerException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -22,7 +23,8 @@ public class MatchingComponent {
     private OrderService orderService;
     @Autowired
     private WebSocketServer webSocketServer;
-    ;
+    @Autowired
+    private OrderLog orderLog;
 
     @Async(value = "orderTaskExecutor")
     public void asyncMatching(Order order) {
@@ -91,15 +93,25 @@ public class MatchingComponent {
         }
 
         List<Order> orders = new ArrayList<>();
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String time = dateFormat.format(date);
+        String fileName = time+".log";
+
+        orderLog.createFile(fileName);
 
         if (order.getQuantityLeft() == 0) {
             order.setStatus("matched");
+            String message = "*********    The order is created at: "+date.toString()+",Order detail: "+order.toString()+System.getProperty("line.separator");
+            orderLog.writeFileAppend(fileName,message);
             log.info("--------------order matched");
             orders.add(order);
         }
 
         if (fundOrder.getQuantityLeft() == 0) {
             fundOrder.setStatus("matched");
+            String message = "*********    The order is created at: "+date.toString()+",Order detail: "+fundOrder.toString()+System.getProperty("line.separator");
+            orderLog.writeFileAppend(fileName,message);
             log.info("--------------fundOrder matched");
             orders.add(fundOrder);
         }
@@ -110,8 +122,8 @@ public class MatchingComponent {
         log.info("--------------fundOrder："+fundOrder.toString());
         log.info("--------------order:"+order.toString());
 
-        orders.addAll(orderService.findPendingBuyOrderLimit10());
-        orders.addAll(orderService.findPendingSellOrderLimit10());
+        orders.addAll(orderService.findPendingBuyOrderLimit20());
+        orders.addAll(orderService.findPendingSellOrderLimit20());
         JSONArray response = new JSONArray();
         for (Order o : orders) {
             JSONObject re = new JSONObject();
