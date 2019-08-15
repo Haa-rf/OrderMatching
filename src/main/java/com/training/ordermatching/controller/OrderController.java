@@ -1,6 +1,7 @@
 package com.training.ordermatching.controller;
 
 import com.training.ordermatching.component.MatchingComponent;
+import com.training.ordermatching.component.OrderLog;
 import com.training.ordermatching.model.Order;
 import com.training.ordermatching.model.User;
 import com.training.ordermatching.service.OrderService;
@@ -13,9 +14,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin
@@ -27,6 +29,8 @@ public class OrderController {
     private OrderService orderService;
     @Autowired
     private MatchingComponent matchingComponent;
+    @Autowired
+    private OrderLog orderLog;
 
     @PostMapping(value = "/submit")
     public void submitOrder(@RequestBody Order param){
@@ -48,6 +52,15 @@ public class OrderController {
         order.setLimitTime(param.getLimitTime());
 
         orderService.save(order);
+
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String time = dateFormat.format(date);
+        String filePath = "//"+time+".log";
+
+        String message = "The order is created: "+order.toString();
+        orderLog.createFile(filePath);
+        orderLog.writeFileAppend(filePath,message);
 
         matchingComponent.asyncMatching(order);
     }
