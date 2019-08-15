@@ -37,6 +37,6 @@ order:
   queueCapacity: 1000
 
 order_log:
-#  filePathPar: /home/ubuntu/OrderMatching/Log/
-  filePathPar: D:\\OrderMatching\\Log\\
+  filePathPar: /home/ubuntu/OrderMatching/Log/
+#  filePathPar: D:\\OrderMatching\\Log\\
 

@@ -3,7 +3,6 @@ package com.training.ordermatching.controller;
 import com.training.ordermatching.component.MatchingComponent;
 import com.training.ordermatching.component.OrderLog;
 import com.training.ordermatching.model.Order;
-import com.training.ordermatching.model.User;
 import com.training.ordermatching.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
@@ -71,15 +70,15 @@ public class OrderController {
         log.info("----------pendingOrders: symbol    "+symbols.toString());
         List<Order> orders = new ArrayList<>();
         for (String symbolName : symbols){
-            orders.addAll(orderService.findPendingBuyOrderLimit10(symbolName));
-            orders.addAll(orderService.findPendingSellOrderLimit10(symbolName));
+            orders.addAll(orderService.findPendingBuyOrderLimit20(symbolName));
+            orders.addAll(orderService.findPendingSellOrderLimit20(symbolName));
         }
         JSONArray response = new JSONArray();
         for (Order order : orders) {
             JSONObject re = new JSONObject();
             re.put("symbol", order.getSymbol());
             re.put("side", order.getSide());
-            re.put("quantity", order.getQuantity());
+            re.put("quantity", order.getQuantityLeft());
             re.put("price",order.getPrice());
             re.put("create_date", order.getCreateDate());
             response.put(re);

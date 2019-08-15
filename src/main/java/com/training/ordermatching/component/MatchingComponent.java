@@ -70,6 +70,22 @@ public class MatchingComponent {
         float orderPrice = order.getPrice();
         if (fundOrderPrice == orderPrice) {
             calMKTorLMT(order, fundOrder);
+        }else {
+            List<Order> orders = new ArrayList<>();
+            orders.addAll(orderService.findPendingBuyOrderLimit20());
+            orders.addAll(orderService.findPendingSellOrderLimit20());
+            JSONArray response = new JSONArray();
+            for (Order o : orders) {
+                JSONObject re = new JSONObject();
+                re.put("symbol", o.getSymbol());
+                re.put("side", o.getSide());
+                re.put("quantity", o.getQuantityLeft());
+                re.put("price", o.getPrice());
+                re.put("create_date", o.getCreateDate());
+                response.put(re);
+            }
+
+            webSocketServer.groupSending(response.toString());
         }
     }
 
@@ -105,7 +121,6 @@ public class MatchingComponent {
             String message = "*********    The order is created at: "+date.toString()+",Order detail: "+order.toString()+System.getProperty("line.separator");
             orderLog.writeFileAppend(fileName,message);
             log.info("--------------order matched");
-            orders.add(order);
         }
 
         if (fundOrder.getQuantityLeft() == 0) {
@@ -113,7 +128,6 @@ public class MatchingComponent {
             String message = "*********    The order is created at: "+date.toString()+",Order detail: "+fundOrder.toString()+System.getProperty("line.separator");
             orderLog.writeFileAppend(fileName,message);
             log.info("--------------fundOrder matched");
-            orders.add(fundOrder);
         }
 
         orderService.save(order);
@@ -129,7 +143,7 @@ public class MatchingComponent {
             JSONObject re = new JSONObject();
             re.put("symbol", o.getSymbol());
             re.put("side", o.getSide());
-            re.put("quantity", o.getQuantity());
+            re.put("quantity", o.getQuantityLeft());
             re.put("price", o.getPrice());
             re.put("create_date", o.getCreateDate());
             response.put(re);
